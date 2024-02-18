@@ -1,4 +1,5 @@
 # Commands
+The commands are implemented in the server
 
     msg <options> <content>
     message the AI.

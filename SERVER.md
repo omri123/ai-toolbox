@@ -9,3 +9,7 @@ The server is pretty simple, but is the heart of the system. It holds chat histo
 In the future:
 * Fork the chat
 * Change history
+
+## Update
+
+All the commands will be implemented in the server, so we can access them from different types of clients
