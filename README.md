@@ -83,7 +83,7 @@ The terminal wrapper allow the AI to track your terminal and to suggest commands
 
 ## LSP server
 
-The LSP server can do file management for the chat server and notify it if the file was updated in VSCode.
+The LSP server can do file management for the chat server and notify it if the file was updated in VSCode. Important: the LSP server is a client of the chat server, the client of the LSP server is the IDE.
 
 ## Multiple chat contexts
 
