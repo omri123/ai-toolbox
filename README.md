@@ -77,6 +77,14 @@ All available commands are available as python functions.
 
 All available commands are available trhough an http server. Actually, the chat assistant and the bash commands are just clients to this server.
 
+## Terminal wrapper (future)
+
+The terminal wrapper allow the AI to track your terminal and to suggest commands in the terminal.
+
+## LSP server
+
+The LSP server can do file management for the chat server and notify it if the file was updated in VSCode.
+
 ## Multiple chat contexts
 
 The chat context hold both conversation and context items (like open files.) The server can handle multiple chat contexts. When running a command you can specify a context to run it in. There are also commands to create an empty context and to copy a context.
