@@ -28,7 +28,7 @@ class Message:
     def from_str(txt: str):
         for role in roles:
             if txt.startswith(role + ": "):
-                return Message(role, txt[len(role + ": ") :])
+                return Message(role, txt[len(role + ": "):])
 
         raise ValueError(f"unkown role in {txt}")
 
