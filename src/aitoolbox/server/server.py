@@ -1,14 +1,16 @@
-from flask import Flask
-
-# from aitoolbox.server.state import ConvesationState
+import uvicorn
+from fastapi import FastAPI
 
 
 def main():
-    app = Flask(__name__)
-    # conversation = ConvesationState()
+    app = FastAPI()
 
-    @app.route("/msg")
-    def msg():
-        return "Hello, World!"
+    @app.get("/msg/")
+    async def msg():
+        return {"message": "Hello World"}
 
-    app.run()
+    uvicorn.run(app)
+
+
+if __name__ == '__main__':
+    main()
