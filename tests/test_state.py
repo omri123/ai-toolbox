@@ -3,11 +3,11 @@ from aitoolbox.server.state import ConvesationState, Message
 
 
 class TestPrinterParser(unittest.TestCase):
-    def testMsg(self):
+    def test_msg(self):
         msg = Message("ASSISTANT", "\ncontent:\n\nhiiii\n")
         self.assertEqual(msg, Message.from_str(str(msg)))
 
-    def testConversation(self):
+    def test_conversation(self):
         conversation = ConvesationState()
         conversation.add_file("/tmp/tmp2.txt")
         conversation.add_file("/tmp/tmp1.txt")
@@ -16,7 +16,8 @@ class TestPrinterParser(unittest.TestCase):
         conversation.add_msg("ASSISTANT", "hi user! how can I help you?")
         with open("/tmp/tmp.md", "w") as f:
             f.write(str(conversation))
-        self.assertEqual(conversation, ConvesationState.from_str(str(conversation)))
+        self.assertEqual(
+            conversation, ConvesationState.from_str(str(conversation)))
 
 
 if __name__ == "__main__":
