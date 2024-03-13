@@ -18,3 +18,4 @@ packages = ["src/aitoolbox"]
 
 [project.scripts]
 ai-server = "aitoolbox.server.server:main"
+ai-msg = "aitoolbox.client.commands:message"

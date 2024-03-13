@@ -3,9 +3,9 @@ from typing import List
 from ordered_set import OrderedSet
 from dataclasses import dataclass
 
-ASSISTANT = "ASSISTANT"
-USER = "USER"
-SYSTEM = "SYSTEM"
+ASSISTANT = "assistant"
+USER = "user"
+SYSTEM = "system"
 roles = [ASSISTANT, USER, SYSTEM]
 
 MESSAGE_SEPERATOR = "//----- seperator -----"
