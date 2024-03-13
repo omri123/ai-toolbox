@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, PlainTextResponse
 from openai import OpenAI
 from aitoolbox.server.state import ConvesationState
 from aitoolbox.server.llm import state2openai
@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 class UserMsg(BaseModel):
     content: str
+    forget: bool
 
 
 client = OpenAI()
@@ -20,13 +21,12 @@ def get_app():
 
     @app.post("/msg/")
     async def msg(user_msg: UserMsg):
-        print(user_msg)
-
         async def response_generator():
-            state.add_msg("user", user_msg.content)
+            messages = state2openai(state)
+            messages.append({"role": "user", "content": user_msg.content})
             stream = client.chat.completions.create(
                 model="gpt-3.5-turbo",
-                messages=state2openai(state),
+                messages=messages,
                 stream=True
             )
             response_content = []
@@ -35,9 +35,16 @@ def get_app():
                 if chunk_content is not None:
                     response_content.append(chunk_content)
                     yield chunk_content
-            state.add_msg("assistant", "".join(response_content))
+
+            if not user_msg.forget:
+                state.add_msg("user", user_msg.content)
+                state.add_msg("assistant", "".join(response_content))
 
         return StreamingResponse(response_generator())
+
+    @app.get("/history/")
+    async def history():
+        return PlainTextResponse(str(state))
 
     return app
 
