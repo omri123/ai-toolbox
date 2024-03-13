@@ -10,6 +10,7 @@ from pydantic import BaseModel
 class UserMsg(BaseModel):
     content: str
     forget: bool
+    prompt: str
 
 
 client = OpenAI()
@@ -22,7 +23,7 @@ def get_app():
     @app.post("/msg/")
     async def msg(user_msg: UserMsg):
         async def response_generator():
-            messages = state2openai(state)
+            messages = state2openai(state, user_msg.prompt)
             messages.append({"role": "user", "content": user_msg.content})
             stream = client.chat.completions.create(
                 model="gpt-3.5-turbo",
