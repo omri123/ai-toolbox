@@ -10,7 +10,8 @@ from pydantic import BaseModel
 class UserMsg(BaseModel):
     content: str
     forget: bool
-    prompt: str
+    sysmsg1: str
+    sysmsg2: str
 
 
 client = OpenAI()
@@ -23,7 +24,7 @@ def get_app():
     @app.post("/msg/")
     async def msg(user_msg: UserMsg):
         async def response_generator():
-            messages = state2openai(state, user_msg.prompt)
+            messages = state2openai(state, user_msg.sysmsg1, user_msg.sysmsg2)
             messages.append({"role": "user", "content": user_msg.content})
             stream = client.chat.completions.create(
                 model="gpt-3.5-turbo",

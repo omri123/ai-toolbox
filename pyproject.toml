@@ -20,3 +20,4 @@ packages = ["src/aitoolbox"]
 ai-server = "aitoolbox.server.server:main"
 ai-msg = "aitoolbox.client.commands:message"
 ai-hist = "aitoolbox.client.commands:history"
+ai-summ = "aitoolbox.client.commands:summarize"
